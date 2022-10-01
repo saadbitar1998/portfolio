@@ -1,8 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-type Props = {};
+import { PageInfo } from "../typings";
 
-const About = (props: Props) => {
+type Props = {
+  pageInfo: PageInfo;
+};
+
+const About = ({ pageInfo }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -12,19 +16,13 @@ const About = (props: Props) => {
     >
       <h3 className="headerTitle">About</h3>
       <div className="space-y-10 px-0 md:px-10">
-        <h4 className="text-4xl font-semibold">
+        <h4 className="text-4xl font-semibold text-center">
           Here is a{" "}
           <span className="underline decoration-[#F7AB0A]/50">little</span>{" "}
           background
         </h4>
-        <p className="text-base ">
-          My name is Saad Bitar! I am a full stack developer. Here is a little
-          bit about me... I have a bachelor degree in Computer Engineering from
-          Beirut Arab University in Lebanon, I have a CGPA of 3.54. I have
-          worked with corporations to help build amazing mobile and web apps
-          both frontend and backend. In addition, I spend my free time learning
-          and keeping up with new technologies, techniques and languages in the
-          tech wold
+        <p className="text-base text-center">
+          {pageInfo.backgroundInformation}
         </p>
       </div>
     </motion.div>

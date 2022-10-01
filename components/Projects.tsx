@@ -1,10 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Project } from "../typings";
+import { urlFor } from "../sanity";
 
-type Props = {};
+type Props = {
+  projects: Project[];
+};
 
-const Projects = ({}: Props) => {
-  const projects = [1, 2, 3, 4];
+const Projects = ({ projects }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -14,10 +17,10 @@ const Projects = ({}: Props) => {
     >
       <h3 className="headerTitle">Projects</h3>
       <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
-        {projects.map((project, index) => (
+        {projects?.map((project, index) => (
           <div
             className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen"
-            key={index}
+            key={project._id}
           >
             <motion.img
               initial={{
@@ -29,7 +32,7 @@ const Projects = ({}: Props) => {
               }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              src="https://w7.pngwing.com/pngs/408/212/png-transparent-project-management-body-of-knowledge-project-management-professional-project-manager-management-project-miscellaneous-text-logo-thumbnail.png"
+              src={urlFor(project?.image).url()}
               alt="project"
             />
             <div className="space-y-10 px-0 md:px-10 max-w-6xl">
@@ -37,13 +40,21 @@ const Projects = ({}: Props) => {
                 <span className="underline decoration-[#F7AB0A]">
                   Case Study {index + 1} of {projects.length}:
                 </span>{" "}
-                Facebook clone
+                {project?.title}
               </h4>
+              <div className="flex items-center justify-center">
+                {project?.technologies.map((technology) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={technology._id}
+                    src={urlFor(technology.image).url()}
+                    alt=""
+                    className="h-10 w-10 object-contain"
+                  />
+                ))}
+              </div>
               <p className="text-lg text-center md:text-left">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse
-                corporis voluptates optio? Aut soluta laudantium est repellendus
-                eum hic, recusandae ea. Ipsam, animi. Dolor facilis perspiciatis
-                asperiores similique harum cumque.
+                {project?.summary}
               </p>
             </div>
           </div>
