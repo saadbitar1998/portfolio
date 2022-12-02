@@ -16,17 +16,22 @@ const Hero = ({ pageInfo }: Props) => {
     loop: true,
     delaySpeed: 2000,
   });
+
+  const imageUrl = urlFor(pageInfo?.heroImage)?.url();
+
   return (
     <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
       <BackgroundCircle />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={urlFor(pageInfo?.heroImage)?.url()}
-        alt="/profile.jpg"
-        width="170"
-        height="170"
-        className="relative rounded-full h-32 w-32 mx-auto object-cover"
-      />
+      {imageUrl && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={urlFor(pageInfo?.heroImage)?.url()}
+          alt="/profile.jpg"
+          width="170"
+          height="170"
+          className="relative rounded-full h-32 w-32 mx-auto object-cover"
+        />
+      )}
       <div className="z-20">
         <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[15px]">
           {pageInfo?.role}
